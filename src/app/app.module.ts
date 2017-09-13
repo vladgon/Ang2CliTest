@@ -10,7 +10,8 @@ import {RouterModule} from '@angular/router';
 import {GLOBAL_ROUTS} from './routs';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { EmptyComponent } from './empty/empty.component';
+import {EmptyComponent} from './empty/empty.component';
+import {AlertDangerComponent, AlertSuccessComponent, DynamicComponentComponent} from './dynamic-component/dynamic-component.component';
 
 
 @NgModule({
@@ -18,7 +19,9 @@ import { EmptyComponent } from './empty/empty.component';
         VladComponent,
         AppDesktopComponent,
         AppComponent,
-        EmptyComponent
+        EmptyComponent,
+        AlertSuccessComponent, AlertDangerComponent,
+        DynamicComponentComponent
     ],
     imports: [
         BrowserModule,
@@ -29,6 +32,7 @@ import { EmptyComponent } from './empty/empty.component';
         RouterModule.forRoot(GLOBAL_ROUTS),
         NgbModule.forRoot()
     ],
+    entryComponents: [AlertSuccessComponent, AlertDangerComponent],
     providers: [],
     bootstrap: [AppDesktopComponent]
 })

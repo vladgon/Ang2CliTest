@@ -1,6 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {NavigationEnd, Router} from '@angular/router';
-import {Subscription} from 'rxjs/Subscription';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 import 'rxjs/add/operator/filter';
 
 @Component({
@@ -8,12 +7,12 @@ import 'rxjs/add/operator/filter';
     templateUrl: './app-desktop.component.html',
     styles: []
 })
-export class AppDesktopComponent implements OnInit, OnDestroy {
+export class AppDesktopComponent {
+
+    isNavbarCollapsed = true;
 
     constructor(private router: Router) {
     }
-
-    isNavbarCollapsed = true;
     // routPath: String;
     // routEvents: Subscription;
 

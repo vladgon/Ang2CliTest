@@ -3,13 +3,19 @@ import {Component, Injectable, Injector, ReflectiveInjector} from '@angular/core
 @Component({
     selector: 'wg-dynamic-component',
     template: `
-        <h1>Angular version 4</h1>
-        <ng-container *ngComponentOutlet="alert; injector: myInjector"></ng-container>
+        <div>
+            <h1>Angular version 4</h1>
+            <ng-container *ngComponentOutlet="alert; injector: myInjector"></ng-container>
 
-        <button (click)="changeComponent()">Change component</button>
+            <button (click)="changeComponent()">Change component</button>
+        </div>
     `,
 })
 export class DynamicComponentComponent {
+    // @HostBinding('@leftInBottomOut') animation;
+    // @HostBinding('style.display') display = 'block';
+    // @HostBinding('style.position') position = 'absolute';
+
     myInjector: Injector;
     alert: any;
 
@@ -48,8 +54,7 @@ class Data {
     `,
 })
 export class AlertSuccessComponent {
-    constructor(public data: Data) {
-    }
+    constructor(public data: Data) {}
 }
 
 @Component({
@@ -59,6 +64,5 @@ export class AlertSuccessComponent {
     `,
 })
 export class AlertDangerComponent {
-    constructor(public data: Data) {
-    }
+    constructor(public data: Data) {}
 }

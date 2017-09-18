@@ -1,48 +1,37 @@
-import {Component} from '@angular/core';
-import {Router} from '@angular/router';
+import {ChangeDetectorRef, Component, ElementRef, HostListener, ViewChild} from '@angular/core';
 import 'rxjs/add/operator/filter';
+import {slideInDownAnimation} from '../animations';
 
 @Component({
     selector: 'wg-app-desktop',
     templateUrl: './app-desktop.component.html',
-    styles: []
+    animations: [slideInDownAnimation]
 })
 export class AppDesktopComponent {
-
+    @ViewChild('toggler') button: ElementRef;
+    navExpanded: boolean;
     isNavbarCollapsed = true;
 
-    constructor(private router: Router) {
+    constructor(private changeDetector: ChangeDetectorRef){}
+    @HostListener('window:resize', ['$event'])
+    onResize(event) {
+        // this.changeDetector.markForCheck();
+        this.navExpanded = this.isNavExpanded();
     }
-    // routPath: String;
-    // routEvents: Subscription;
-
-    // ngOnInit(): void {
-    //     this.routEvents = this.router.events
-    //         .filter(event => event instanceof NavigationEnd)
-    //         // .map(() => this.activatedRoute)
-    //         // .map((route) => {
-    //         //     while (route.firstChild) {
-    //         //         route = route.firstChild;
-    //         //     }
-    //         //     return route;
-    //         // })
-    //         // .filter((route) => route.outlet === 'primary')
-    //         // .mergeMap((route) => route.data)
-    //         .subscribe((event: NavigationEnd) => {
-    //             this.routPath = event.url;
-    //         });
-    // }
-
-    // ngOnDestroy(): void {
-    //     this.routEvents.unsubscribe();
-    // }
 
     navCollapse() {
         this.isNavbarCollapsed = !this.isNavbarCollapsed;
     }
 
+    isNavExpanded(): boolean {
+        return getComputedStyle(this.button.nativeElement).display === 'none';
+    }
+
     // isActive(linkName: string): boolean {
     //     return linkName === 'welcome' && (!this.routPath || this.routPath === '/') ||
     //         this.routPath && this.routPath === `/${linkName}`;
+    // }
+    // animateTest() {
+    //     this.state = this.isNavbarCollapsed ? 'end' : 'start';
     // }
 }

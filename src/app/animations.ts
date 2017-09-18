@@ -6,11 +6,13 @@ export const slideInDownAnimation: AnimationMetadata =
         state('*',
             style({
                 opacity: 1,
+                height: '*'
             })
         ),
         transition(':enter', [
             style({
                 opacity: 0,
+                height: '0'
                 // transform: 'translateX(-100%)'
 
             }),
@@ -19,6 +21,7 @@ export const slideInDownAnimation: AnimationMetadata =
         transition(':leave', [
             animate('.8s ease-out', style({
                 opacity: 0,
+                height: '0'
                 // transform: 'translateX(100%)'
             }))
         ])

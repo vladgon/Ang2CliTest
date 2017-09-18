@@ -1,4 +1,5 @@
-import {Component, Injectable, Injector, ReflectiveInjector} from '@angular/core';
+import {Component, HostBinding, Injectable, Injector, ReflectiveInjector} from '@angular/core';
+import {slideInDownAnimation} from '../animations';
 
 @Component({
     selector: 'wg-dynamic-component',
@@ -10,11 +11,12 @@ import {Component, Injectable, Injector, ReflectiveInjector} from '@angular/core
             <button (click)="changeComponent()">Change component</button>
         </div>
     `,
+    animations: [slideInDownAnimation]
 })
 export class DynamicComponentComponent {
-    // @HostBinding('@leftInBottomOut') animation;
-    // @HostBinding('style.display') display = 'block';
-    // @HostBinding('style.position') position = 'absolute';
+    @HostBinding('@leftInBottomOut') animation;
+    @HostBinding('style.display') display = 'block';
+    @HostBinding('style.position') position = 'absolute';
 
     myInjector: Injector;
     alert: any;
@@ -50,8 +52,9 @@ class Data {
 @Component({
     selector: 'wg-alert-success',
     template: `
-        <p>{{data.getData('success')}}</p>
+        <p [@leftInBottomOut]>{{data.getData('success')}}</p>
     `,
+    animations: [slideInDownAnimation]
 })
 export class AlertSuccessComponent {
     constructor(public data: Data) {}
@@ -60,8 +63,9 @@ export class AlertSuccessComponent {
 @Component({
     selector: 'wg-alert-danger',
     template: `
-        <p>{{data.getData('alert')}}</p>
+        <p [@leftInBottomOut]>{{data.getData('alert')}}</p>
     `,
+    animations: [slideInDownAnimation]
 })
 export class AlertDangerComponent {
     constructor(public data: Data) {}

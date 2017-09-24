@@ -50,23 +50,21 @@ class Data {
 }
 
 @Component({
-    selector: 'wg-alert-success',
     template: `
         <p [@leftInBottomOut]>{{data.getData('success')}}</p>
     `,
     animations: [slideInDownAnimation]
 })
 export class AlertSuccessComponent {
-    constructor(public data: Data) {}
+    constructor(readonly data: Data) {}
 }
 
 @Component({
-    selector: 'wg-alert-danger',
     template: `
         <p [@leftInBottomOut]>{{data.getData('alert')}}</p>
     `,
     animations: [slideInDownAnimation]
 })
 export class AlertDangerComponent {
-    constructor(public data: Data) {}
+    constructor(readonly data: Data) {}
 }

@@ -7,7 +7,7 @@
     </button>
 
 
-    <div  *ngIf="!isNavbarCollapsed || navExpanded" class="collapse navbar-collapse"
+    <div *ngIf="!isNavbarCollapsed || isTogglerButtonHidden()" class="collapse navbar-collapse"
          [@leftInBottomOut]
          [ngbCollapse]="isNavbarCollapsed">
         <ul class="navbar-nav mr-auto">

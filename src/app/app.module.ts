@@ -12,6 +12,7 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {EmptyComponent} from './empty/empty.component';
 import {AlertDangerComponent, AlertSuccessComponent, DynamicComponentComponent} from './dynamic-component/dynamic-component.component';
+import {EventMgrModule} from './event/event-mgr/event-mgr.module';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {AlertDangerComponent, AlertSuccessComponent, DynamicComponentComponent} 
         HttpClientModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(GLOBAL_ROUTS),
-        NgbModule.forRoot()
+        NgbModule.forRoot(),
+        EventMgrModule
     ],
     entryComponents: [AlertSuccessComponent, AlertDangerComponent],
     providers: [],

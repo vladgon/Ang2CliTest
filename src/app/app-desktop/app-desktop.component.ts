@@ -1,34 +1,32 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
 import 'rxjs/add/operator/filter';
 import {slideInDownAnimation} from '../animations';
-import {EventManager} from '@angular/platform-browser';
-import {Subject} from 'rxjs/Subject';
-import 'rxjs/add/operator/throttleTime';
+import {EventMgr} from '../event/event-mgr/event-mgr';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
     selector: 'wg-app-desktop',
     templateUrl: './app-desktop.component.html',
-    animations: [slideInDownAnimation]
+    animations: [slideInDownAnimation],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppDesktopComponent implements OnDestroy {
     isNavBarCollapsed = true;
-    private resizeSubject = new Subject<Window>();
     private toggler: ElementRef;
+    private resizeSubscription: Subscription;
 
-    constructor(private changeDetector: ChangeDetectorRef, private eventManager: EventManager) {
-        this.eventManager.addGlobalEventListener('window', 'resize', event => {
-            this.resizeSubject.next(event.target);
-        });
-        this.resizeSubject.asObservable()
-            .throttleTime(200)
-            .subscribe(_ => this.navCollapse(this.isNavBarCollapsed || this.isTogglerButtonHidden()));
+    constructor(private eventMgr: EventMgr) {
+        this.resizeSubscription = eventMgr.addWindowResizeListener(_ => this.navCollapse(
+            this.isNavBarCollapsed || this.isTogglerButtonHidden()),
+            0,
+            200);
     }
 
     @ViewChild('toggler')
     private set button(toggler: ElementRef) {this.toggler = toggler; }
 
     ngOnDestroy(): void {
-        this.resizeSubject.unsubscribe();
+        if (this.resizeSubscription) {this.resizeSubscription.unsubscribe(); }
     }
 
     navCollapse(isNavBarCollapsed: boolean) {

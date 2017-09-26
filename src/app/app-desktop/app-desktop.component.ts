@@ -1,14 +1,14 @@
-import {ChangeDetectionStrategy, Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
 import 'rxjs/add/operator/filter';
-import {slideInDownAnimation} from '../animations';
 import {EventMgr} from '../event/event-mgr/event-mgr';
 import {Subscription} from 'rxjs/Subscription';
+import {navBarAnimation} from './nav-animations';
 
 @Component({
     selector: 'wg-app-desktop',
     templateUrl: './app-desktop.component.html',
-    animations: [slideInDownAnimation],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    animations: [navBarAnimation],
+    // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppDesktopComponent implements OnDestroy {
     isNavBarCollapsed = true;
@@ -17,9 +17,21 @@ export class AppDesktopComponent implements OnDestroy {
 
     constructor(private eventMgr: EventMgr) {
         this.resizeSubscription = eventMgr.addWindowResizeListener(_ => this.navCollapse(
-            this.isNavBarCollapsed || this.isTogglerButtonHidden()),
+            this.isNavBarCollapsed),
             0,
             200);
+    }
+
+    get animationState(): string {
+        if (this.togglerButtonHidden) {
+            return 'togglerHidden';
+        } else {
+            return this.isNavBarCollapsed ? 'collapsed' : 'expanded';
+        }
+    }
+
+    get togglerButtonHidden(): boolean {
+        return getComputedStyle(this.toggler.nativeElement).display === 'none';
     }
 
     @ViewChild('toggler')
@@ -30,10 +42,6 @@ export class AppDesktopComponent implements OnDestroy {
     }
 
     navCollapse(isNavBarCollapsed: boolean) {
-        this.isNavBarCollapsed = isNavBarCollapsed;
-    }
-
-    private isTogglerButtonHidden(): boolean {
-        return getComputedStyle(this.toggler.nativeElement).display === 'none';
+        this.isNavBarCollapsed = isNavBarCollapsed || this.togglerButtonHidden;
     }
 }

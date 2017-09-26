@@ -32,7 +32,7 @@ import {EventMgrModule} from './event/event-mgr/event-mgr.module';
         BrowserAnimationsModule,
         RouterModule.forRoot(GLOBAL_ROUTS),
         NgbModule.forRoot(),
-        EventMgrModule
+        EventMgrModule.forRoot()
     ],
     entryComponents: [AlertSuccessComponent, AlertDangerComponent],
     providers: [],

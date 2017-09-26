@@ -7,9 +7,10 @@
     </button>
 
 
-    <div *ngIf="!isNavBarCollapsed || isTogglerButtonHidden()" class="collapse navbar-collapse"
-         [@leftInBottomOut]
-         [ngbCollapse]="isNavBarCollapsed">
+    <div class="collapse navbar-collapse"
+         [@slideTopButton]="animationState"
+         [ngbCollapse]="isNavBarCollapsed"
+         [ngStyle]="{'display':  isNavBarCollapsed && !togglerButtonHidden ? 'block !important' : 'block'}">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a routerLink="welcome" routerLinkActive="active" class="nav-link">Home <span class="sr-only">Test

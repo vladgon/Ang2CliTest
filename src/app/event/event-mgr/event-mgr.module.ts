@@ -1,12 +1,17 @@
-import {NgModule} from '@angular/core';
+import {ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {EventMgr} from './event-mgr';
 
 @NgModule({
     imports: [
         CommonModule
-    ],
-    declarations: [],
-    providers: [EventMgr]
+    ]
 })
-export class EventMgrModule {}
+export class EventMgrModule {
+    static forRoot(): ModuleWithProviders {
+        return {
+            ngModule: EventMgrModule,
+            providers: [EventMgr]
+        };
+    }
+}

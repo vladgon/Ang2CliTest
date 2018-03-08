@@ -59,11 +59,14 @@
   "defaults": {
     "styleExt": "css",
     "class": {
-      "spec:": false
+      "spec": false
     },
     "component": {
       "inlineStyle": true,
-      "spec:": false
+      "spec": false
+    },
+    "service": {
+      "spec": false
     },
     "serve": {
       "proxyConfig": null

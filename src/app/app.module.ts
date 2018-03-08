@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {VladComponent} from './vlad.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -13,6 +13,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {EmptyComponent} from './empty/empty.component';
 import {AlertDangerComponent, AlertSuccessComponent, DynamicComponentComponent} from './dynamic-component/dynamic-component.component';
 import {EventMgrModule} from './event/event-mgr/event-mgr.module';
+import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
+import { DynamicFormQuestionComponent } from './dynamic-form/dynamic-form-question/dynamic-form-question.component';
 
 
 @NgModule({
@@ -22,12 +24,14 @@ import {EventMgrModule} from './event/event-mgr/event-mgr.module';
         AppComponent,
         EmptyComponent,
         AlertSuccessComponent, AlertDangerComponent,
-        DynamicComponentComponent
+        DynamicComponentComponent,
+        DynamicFormComponent,
+        DynamicFormQuestionComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
-        HttpModule,
+        ReactiveFormsModule,
         HttpClientModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(GLOBAL_ROUTS),

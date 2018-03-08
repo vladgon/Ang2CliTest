@@ -1,14 +1,13 @@
-import {Component, HostBinding, Injectable, Injector, ReflectiveInjector} from '@angular/core';
+import {Component, HostBinding, Injectable, Injector} from '@angular/core';
 import {slideInDownAnimation} from '../animations';
 
 @Component({
     selector: 'wg-dynamic-component',
     template: `
-        <div>
+        <div class="container">
             <h1>Angular version 4</h1>
-            <ng-container *ngComponentOutlet="alert; injector: myInjector"></ng-container>
-
             <button (click)="changeComponent()">Change component</button>
+            <ng-container *ngComponentOutlet="alert; injector: myInjector"></ng-container>
         </div>
     `,
     animations: [slideInDownAnimation]
@@ -19,13 +18,13 @@ export class DynamicComponentComponent {
     @HostBinding('style.position') position = 'absolute';
 
     myInjector: Injector;
-    alert: any;
+    alert = AlertDangerComponent;
 
     data: Data;
 
-    constructor(injector: Injector) {
+    constructor(private injector: Injector) {
         this.data = new Data('Init');
-        this.myInjector = ReflectiveInjector.resolveAndCreate([{provide: Data, useValue: this.data}], injector);
+        this.myInjector = Injector.create({providers: [{provide: Data, useValue: this.data}], parent: injector});
     }
 
     changeComponent() {
@@ -51,20 +50,24 @@ class Data {
 
 @Component({
     template: `
-        <p [@leftInBottomOut]>{{data.getData('success')}}</p>
+        <div class="alert-success" [@leftInBottomOut]>
+            <p>{{data.getData('success')}}</p>
+        </div>
     `,
     animations: [slideInDownAnimation]
 })
 export class AlertSuccessComponent {
-    constructor(readonly data: Data) {}
+    constructor(readonly data: Data) {
+    }
 }
 
 @Component({
     template: `
-        <p [@leftInBottomOut]>{{data.getData('alert')}}</p>
+        <p class="alert-danger" [@leftInBottomOut]>{{data.getData('alert')}}</p>
     `,
     animations: [slideInDownAnimation]
 })
 export class AlertDangerComponent {
-    constructor(readonly data: Data) {}
+    constructor(readonly data: Data) {
+    }
 }

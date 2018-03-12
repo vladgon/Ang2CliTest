@@ -12,7 +12,7 @@ import {slideInDownAnimation} from '../animations';
     `,
     animations: [slideInDownAnimation]
 })
-export class DynamicComponentComponent {
+export class DynamicComponent {
     @HostBinding('@leftInBottomOut') animation;
     @HostBinding('style.display') display = 'block';
     @HostBinding('style.position') position = 'absolute';
@@ -34,8 +34,8 @@ export class DynamicComponentComponent {
 
 }
 
-@Injectable()
-class Data {
+// @Injectable()
+export class Data {
     constructor(public initData: string) {
     }
 
@@ -63,7 +63,7 @@ export class AlertSuccessComponent {
 
 @Component({
     template: `
-        <p class="alert-danger" [@leftInBottomOut]>{{data.getData('alert')}}</p>
+        <div class="alert-danger"  style="white-space: nowrap;" [@leftInBottomOut]>{{data.getData('alert')}}</div>
     `,
     animations: [slideInDownAnimation]
 })

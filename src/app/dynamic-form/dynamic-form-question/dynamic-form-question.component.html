@@ -1,5 +1,5 @@
 <div [formGroup]="form">
-  <label [attr.for]="question.options.key">{{question.label}}</label>
+  <label [attr.for]="question.options.key">{{question.options.label}}</label>
 
   <div [ngSwitch]="question.options.controlType">
 
@@ -12,5 +12,5 @@
 
   </div>
 
-  <div class="errorMessage alert-danger" *ngIf="!isValid">{{question.label}} is required</div>
+  <div class="errorMessage alert-danger" *ngIf="!isValid">{{question.options.label}} is required</div>
 </div>

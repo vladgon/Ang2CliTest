@@ -5,7 +5,7 @@ import {DropdownQuestion, Options, QuestionBase, TextboxQuestion} from './questi
 @Injectable()
 export class QuestionService {
 
-    getQuestions() {
+    getQuestions(): QuestionBase<string>[] {
         const questions: QuestionBase<string>[] = [
 
             new DropdownQuestion(<Options<string>>{
@@ -36,7 +36,9 @@ export class QuestionService {
             })
         ];
 
-        return questions.sort((a, b) => a.options.order - b.options.order);
+        return questions.sort((a, b) => a && a.options && a.options.order &&
+            b && b.options && b.options.order &&
+            a.options.order - b.options.order || 0);
     }
 }
 

@@ -18,7 +18,7 @@ export const slideInDownAnimation: AnimationMetadata =
                 // transform: 'translateX(-100%)'
 
             }),
-            animate('2.8s ease-in')
+            animate('0.8s ease-in')
         ]),
         transition(':leave', [
             animate('.8s ease-out', style({
@@ -26,6 +26,6 @@ export const slideInDownAnimation: AnimationMetadata =
                 height: '0'
                 // transform: 'translateX(100%)'
             })),
-            animate('2.8s ease-in')
+            animate('0.8s ease-in')
         ])
     ]);

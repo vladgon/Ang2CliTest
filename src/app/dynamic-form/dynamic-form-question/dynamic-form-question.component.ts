@@ -15,7 +15,11 @@ export class DynamicFormQuestionComponent {
     constructor() {
     }
 
-    get isValid() {
-        return this.form.controls[this.question.options.key].valid;
+    get isValid(): boolean {
+        if (this.question.options.key && this.form.controls[this.question.options.key]) {
+            return this.form.controls[this.question.options.key].valid;
+        } else {
+            return false;
+        }
     }
 }

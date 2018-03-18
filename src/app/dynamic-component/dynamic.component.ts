@@ -1,5 +1,39 @@
-import {Component, HostBinding, Injectable, Injector} from '@angular/core';
+import {Component, HostBinding, Injector} from '@angular/core';
 import {slideInDownAnimation} from '../animations';
+
+@Component({
+    template: `
+        <div class="alert-success" style="white-space: nowrap" [@leftInBottomOut]>
+            {{data.getData('success')}}
+        </div>
+    `,
+    animations: [slideInDownAnimation]
+})
+export class AlertSuccessComponent {
+    @HostBinding('style.display') display = 'block';
+    @HostBinding('style.position') position = 'absolute';
+    @HostBinding('style.overflow') overflow = 'hidden';
+
+    constructor(readonly data: Data) {
+    }
+}
+
+@Component({
+    template: `
+        <div class="alert-danger" style="white-space: nowrap" [@leftInBottomOut]>
+            {{data.getData('alert')}}
+        </div>
+    `,
+    animations: [slideInDownAnimation]
+})
+export class AlertDangerComponent {
+    @HostBinding('style.display') display = 'block';
+    @HostBinding('style.overflow') overflow = 'hidden';
+
+    constructor(readonly data: Data) {
+    }
+}
+
 
 @Component({
     selector: 'wg-dynamic-component',
@@ -10,6 +44,7 @@ import {slideInDownAnimation} from '../animations';
             <ng-container *ngComponentOutlet="alert; injector: myInjector"></ng-container>
         </div>
     `,
+    entryComponents: [AlertSuccessComponent, AlertDangerComponent],
     animations: [slideInDownAnimation]
 })
 export class DynamicComponent {
@@ -34,7 +69,6 @@ export class DynamicComponent {
 
 }
 
-// @Injectable()
 export class Data {
     constructor(public initData: string) {
     }
@@ -45,29 +79,5 @@ export class Data {
         } else {
             return `Success Data 1 ${name} - ${this.initData}`;
         }
-    }
-}
-
-@Component({
-    template: `
-        <div class="alert-success" [@leftInBottomOut]>
-            <p>{{data.getData('success')}}</p>
-        </div>
-    `,
-    animations: [slideInDownAnimation]
-})
-export class AlertSuccessComponent {
-    constructor(readonly data: Data) {
-    }
-}
-
-@Component({
-    template: `
-        <div class="alert-danger"  style="white-space: nowrap;" [@leftInBottomOut]>{{data.getData('alert')}}</div>
-    `,
-    animations: [slideInDownAnimation]
-})
-export class AlertDangerComponent {
-    constructor(readonly data: Data) {
     }
 }

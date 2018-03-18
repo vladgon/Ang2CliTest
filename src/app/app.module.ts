@@ -41,7 +41,6 @@ import {DynamicModule} from './dynamic-component/dynamic.module';
         NgbModule.forRoot(),
         EventMgrModule.forRoot()
     ],
-    entryComponents: [AlertSuccessComponent, AlertDangerComponent],
     providers: [],
     bootstrap: [AppDesktopComponent]
 })

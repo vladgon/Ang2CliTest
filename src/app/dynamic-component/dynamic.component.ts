@@ -1,6 +1,9 @@
 import {Component, HostBinding, Injector} from '@angular/core';
 import {slideInDownAnimation} from '../animations';
 
+interface Dynamic {
+}
+
 @Component({
     template: `
         <div class="alert-success" style="white-space: nowrap" [@leftInBottomOut]>
@@ -9,12 +12,12 @@ import {slideInDownAnimation} from '../animations';
     `,
     animations: [slideInDownAnimation]
 })
-export class AlertSuccessComponent {
+export class AlertSuccessComponent implements Dynamic {
     @HostBinding('style.display') display = 'block';
     @HostBinding('style.position') position = 'absolute';
     @HostBinding('style.overflow') overflow = 'hidden';
 
-    constructor(readonly data: Data) {
+    constructor(public data: Data) {
     }
 }
 
@@ -26,11 +29,12 @@ export class AlertSuccessComponent {
     `,
     animations: [slideInDownAnimation]
 })
-export class AlertDangerComponent {
+
+export class AlertDangerComponent implements Dynamic {
     @HostBinding('style.display') display = 'block';
     @HostBinding('style.overflow') overflow = 'hidden';
 
-    constructor(readonly data: Data) {
+    constructor(public  data: Data) {
     }
 }
 
@@ -53,7 +57,7 @@ export class DynamicComponent {
     @HostBinding('style.position') position = 'absolute';
 
     myInjector: Injector;
-    alert = AlertDangerComponent;
+    alert: Dynamic = AlertDangerComponent;
 
     data: Data;
 

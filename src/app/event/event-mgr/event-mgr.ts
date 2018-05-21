@@ -1,36 +1,29 @@
 import {EventManager} from '@angular/platform-browser';
-import {Subject} from 'rxjs/Subject';
-import {Subscription} from 'rxjs/Subscription';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/throttleTime';
+import {Observable, Subject, Subscription} from 'rxjs';
 import {Injectable} from '@angular/core';
+import {debounceTime, throttleTime} from 'rxjs/operators';
 
 type ResizeListener = (Window) => void;
 
 @Injectable()
 export class EventMgr {
 
-    constructor(private eventManager: EventManager) {}
-
-    private _resizeSubject: Subject<Window>;
-
-    private get resizeSubject(): Subject<Window> {
-        if (this._resizeSubject) {
-            return this._resizeSubject;
-        } else {
-            this._resizeSubject = new Subject<Window>();
-            this.eventManager.addGlobalEventListener('window', 'resize', event => {
-                this._resizeSubject.next(event.target);
-            });
-            return this._resizeSubject;
-
-        }
+    constructor(private eventManager: EventManager) {
     }
 
-    public addWindowResizeListener(handler: ResizeListener, throttleTime: number = 0, debounceTime: number = 0): Subscription {
-        let observable = this.resizeSubject.asObservable();
-        if (throttleTime > 0) {observable = observable.throttleTime(throttleTime); }
-        if (debounceTime > 0) {observable = observable.debounceTime(debounceTime); }
-        return observable.subscribe(handler);
+    private get resizeSubject(): Subject<Window> {
+        const resizeSubject = new Subject<Window>();
+        this.eventManager.addGlobalEventListener('window', 'resize', event => {
+            resizeSubject.next(event.target);
+        });
+        return resizeSubject;
+
+    }
+
+    public addWindowResizeListener(handler: ResizeListener, throttle: number = 0, debounce: number = 0): Subscription {
+        return this.resizeSubject.pipe(
+            (throttle > 0 ? throttleTime(throttle) : (s: Observable<Window>) => s),
+            (debounce > 0 ? debounceTime(debounce) : (s: Observable<Window>) => s)
+        ).subscribe(handler);
     }
 }

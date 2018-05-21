@@ -8,7 +8,6 @@ import {RouterModule} from '@angular/router';
 import {GLOBAL_ROUTS} from './routs';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {EmptyComponent} from './empty/empty.component';
 import {AlertDangerComponent, AlertSuccessComponent} from './dynamic-component/dynamic.component';
 import {EventMgrModule} from './event/event-mgr/event-mgr.module';
 import {DynamicFormComponent} from './dynamic-form/dynamic-form.component';
@@ -22,7 +21,6 @@ import {DynamicModule} from './dynamic-component/dynamic.module';
     declarations: [
         VladComponent,
         AppComponent,
-        EmptyComponent,
         AlertSuccessComponent, AlertDangerComponent,
         DynamicFormComponent,
         DynamicFormQuestionComponent

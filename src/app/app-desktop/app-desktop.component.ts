@@ -1,22 +1,20 @@
 import {Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
-import 'rxjs/add/operator/filter';
 import {EventMgr} from '../event/event-mgr/event-mgr';
-import {Subscription} from 'rxjs/Subscription';
 import {navBarAnimation} from './nav-animations';
+import {Subscription} from 'rxjs';
 
 @Component({
     selector: 'wg-app-desktop',
     templateUrl: './app-desktop.component.html',
     animations: [navBarAnimation],
-    // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppDesktopComponent implements OnDestroy {
     isNavBarCollapsed = true;
     private toggler: ElementRef;
-    private resizeSubscription: Subscription;
+    private readonly resizeSubscription$: Subscription;
 
     constructor(private eventMgr: EventMgr) {
-        this.resizeSubscription = eventMgr.addWindowResizeListener(_ => this.navCollapse(
+        this.resizeSubscription$ = eventMgr.addWindowResizeListener(_ => this.navCollapse(
             this.isNavBarCollapsed),
             0,
             0);
@@ -35,10 +33,14 @@ export class AppDesktopComponent implements OnDestroy {
     }
 
     @ViewChild('toggler')
-    private set button(toggler: ElementRef) {this.toggler = toggler; }
+    private set button(toggler: ElementRef) {
+        this.toggler = toggler;
+    }
 
     ngOnDestroy(): void {
-        if (this.resizeSubscription) {this.resizeSubscription.unsubscribe(); }
+        if (this.resizeSubscription$) {
+            this.resizeSubscription$.unsubscribe();
+        }
     }
 
     navCollapse(isNavBarCollapsed: boolean) {

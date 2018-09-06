@@ -4,7 +4,9 @@ import {DynamicFormComponent} from './dynamic-form/dynamic-form.component';
 
 export const GLOBAL_ROUTS: Routes = [
     {path: 'welcome', component: VladComponent},
+    // {path: 'empty', loadChildren: () => DynamicModule},
     {path: 'empty', loadChildren: 'app/dynamic-component/dynamic.module#DynamicModule'},
+    // {path: 'empty', component: DynamicComponent},
     {path: 'dynamicForm', component: DynamicFormComponent},
     {path: '', component: VladComponent, pathMatch: 'prefix'},
     {path: '**', redirectTo: ''}];

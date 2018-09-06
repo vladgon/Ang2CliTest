@@ -8,7 +8,6 @@ import {RouterModule} from '@angular/router';
 import {GLOBAL_ROUTS} from './routs';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {AlertDangerComponent, AlertSuccessComponent} from './dynamic-component/dynamic.component';
 import {EventMgrModule} from './event/event-mgr/event-mgr.module';
 import {DynamicFormComponent} from './dynamic-form/dynamic-form.component';
 import {DynamicFormQuestionComponent} from './dynamic-form/dynamic-form-question/dynamic-form-question.component';
@@ -21,25 +20,23 @@ import {DynamicModule} from './dynamic-component/dynamic.module';
     declarations: [
         VladComponent,
         AppComponent,
-        AlertSuccessComponent, AlertDangerComponent,
         DynamicFormComponent,
         DynamicFormQuestionComponent
     ],
     imports: [
         BrowserModule,
+        NgbModule,
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
         BrowserAnimationsModule,
 
         DesktopModule,
-        DynamicModule,
-        RouterModule.forRoot(GLOBAL_ROUTS),
+        EventMgrModule.forRoot(),
 
-        NgbModule.forRoot(),
-        EventMgrModule.forRoot()
+        DynamicModule,
+        RouterModule.forRoot(GLOBAL_ROUTS)
     ],
-    providers: [],
     bootstrap: [AppDesktopComponent]
 })
 export class AppModule {

@@ -20,10 +20,10 @@ export class EventMgr {
 
     }
 
-    public addWindowResizeListener(handler: ResizeListener, throttle: number = 0, debounce: number = 0): Subscription {
+    public addWindowResizeListener(handler: ResizeListener, throttle: number | null = null, debounce: number | null = null): Subscription {
         return this.resizeSubject.pipe(
-            (throttle > 0 ? throttleTime(throttle) : (s: Observable<Window>) => s),
-            (debounce > 0 ? debounceTime(debounce) : (s: Observable<Window>) => s)
+            (throttle ? throttleTime(throttle) : (s: Observable<Window>) => s),
+            (debounce ? debounceTime(debounce) : (s: Observable<Window>) => s)
         ).subscribe(handler);
     }
 }

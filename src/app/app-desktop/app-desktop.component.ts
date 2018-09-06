@@ -14,10 +14,7 @@ export class AppDesktopComponent implements OnDestroy {
     private readonly resizeSubscription$: Subscription;
 
     constructor(private eventMgr: EventMgr) {
-        this.resizeSubscription$ = eventMgr.addWindowResizeListener(_ => this.navCollapse(
-            this.isNavBarCollapsed),
-            0,
-            0);
+        this.resizeSubscription$ = eventMgr.addWindowResizeListener(_ => this.navCollapse(this.isNavBarCollapsed));
     }
 
     get animationState(): string {

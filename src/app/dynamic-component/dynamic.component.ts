@@ -1,41 +1,10 @@
 import {Component, HostBinding, Injector} from '@angular/core';
 import {slideInDownAnimation} from '../animations';
+import {Data} from './data';
+import {AlertDangerComponent} from './alert.danger.component';
+import {AlertSuccessComponent} from './alert.success.component';
 
-interface Dynamic {
-}
-
-@Component({
-    template: `
-        <div class="alert-success" style="white-space: nowrap" [@leftInBottomOut]>
-            {{data.getData('success')}}
-        </div>
-    `,
-    animations: [slideInDownAnimation]
-})
-export class AlertSuccessComponent implements Dynamic {
-    @HostBinding('style.display') display = 'block';
-    @HostBinding('style.position') position = 'absolute';
-    @HostBinding('style.overflow') overflow = 'hidden';
-
-    constructor(public data: Data) {
-    }
-}
-
-@Component({
-    template: `
-        <div class="alert-danger" style="white-space: nowrap" [@leftInBottomOut]>
-            {{data.getData('alert')}}
-        </div>
-    `,
-    animations: [slideInDownAnimation]
-})
-
-export class AlertDangerComponent implements Dynamic {
-    @HostBinding('style.display') display = 'block';
-    @HostBinding('style.overflow') overflow = 'hidden';
-
-    constructor(public  data: Data) {
-    }
+export interface Dynamic {
 }
 
 
@@ -45,7 +14,7 @@ export class AlertDangerComponent implements Dynamic {
         <div class="container">
             <h1>Angular version 4</h1>
             <button (click)="changeComponent()">Change component</button>
-            <ng-container *ngComponentOutlet="alert; injector: myInjector"></ng-container>
+            <ng-container *ngComponentOutlet="alert; injector: myInjector;"></ng-container>
         </div>
     `,
     entryComponents: [AlertSuccessComponent, AlertDangerComponent],
@@ -73,15 +42,3 @@ export class DynamicComponent {
 
 }
 
-export class Data {
-    constructor(public initData: string) {
-    }
-
-    getData(name: string) {
-        if (name === 'alert') {
-            return `Alert Data 1 ${name} - ${this.initData}`;
-        } else {
-            return `Success Data 1 ${name} - ${this.initData}`;
-        }
-    }
-}

@@ -21,7 +21,7 @@ export const navBarAnimation: AnimationMetadata =
             })
         ),
         transition('collapsed => togglerHidden',
-            animate('2.3s ease-out')),
+            animate('0.3s ease-out')),
         transition('collapsed => expanded',
             animate('0.3s ease-in')),
         transition('expanded => collapsed',

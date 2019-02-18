@@ -18,14 +18,20 @@
             "polyfills": "src/polyfills.ts",
             "assets": [
               "src/assets",
-              "src/favicon.ico"
+              "src/favicon.ico",
+              {
+                "glob": "*.wasm",
+                "input": "src/wasm",
+                "output": "/"
+              }
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": [
-              "node_modules/web-animations-js/web-animations.min.js"
+              "node_modules/web-animations-js/web-animations.min.js",
+              "src/wasm/webui.js"
             ]
           },
           "configurations": {

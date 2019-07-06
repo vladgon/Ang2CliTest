@@ -29,7 +29,7 @@ export class AppDesktopComponent implements OnDestroy {
         return getComputedStyle(this.toggler.nativeElement).display === 'none';
     }
 
-    @ViewChild('toggler')
+    @ViewChild('toggler', { static: true })
     private set button(toggler: ElementRef) {
         this.toggler = toggler;
     }

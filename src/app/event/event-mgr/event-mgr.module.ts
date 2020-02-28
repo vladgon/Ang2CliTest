@@ -8,7 +8,7 @@ import {EventMgr} from './event-mgr';
     ]
 })
 export class EventMgrModule {
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<EventMgrModule> {
         return {
             ngModule: EventMgrModule,
             providers: [EventMgr]

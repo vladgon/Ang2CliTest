@@ -49,7 +49,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -58,6 +57,10 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ]
             }
@@ -143,16 +146,16 @@
   "defaultProject": "ang2-cli-test",
   "schematics": {
     "@schematics/angular:class": {
-      "spec": false
+      "skipTests": true
     },
     "@schematics/angular:component": {
       "inlineStyle": true,
-      "spec": false,
+      "skipTests": true,
       "prefix": "wg",
-      "styleext": "css"
+      "style": "css"
     },
     "@schematics/angular:service": {
-      "spec": false
+      "skipTests": true
     },
     "@schematics/angular:directive": {
       "prefix": "wg"

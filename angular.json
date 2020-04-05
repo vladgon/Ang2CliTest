@@ -69,7 +69,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ang2-cli-test:build"
+            "browserTarget": "ang2-cli-test:build",
+            "host": "127.0.0.1"
           },
           "configurations": {
             "production": {
